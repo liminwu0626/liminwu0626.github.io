@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>Eddy的个人站点</title>
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://www.liminwu.me/"/>
   <updated>2017-01-17T07:08:53.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://www.liminwu.me/</id>
   
   <author>
     <name>limin wu</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2017/01/17/hello-world/"/>
-    <id>http://yoursite.com/2017/01/17/hello-world/</id>
+    <link href="http://www.liminwu.me/2017/01/17/hello-world/"/>
+    <id>http://www.liminwu.me/2017/01/17/hello-world/</id>
     <published>2017-01-17T07:08:53.000Z</published>
     <updated>2017-01-17T07:08:53.000Z</updated>
     
