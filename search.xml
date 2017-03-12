@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title></title>
+      <url>%2F2017%2F03%2F13%2FMac%E5%AE%89%E8%A3%85Homebrew%2F</url>
+      <content type="text"><![CDATA[Mac安装Homebrewbrew 全称Homebrew 是Mac OSX上的软件包管理工具 Homebrew 安装和卸载工具 只用一行命令就能完成 官方地址: http://brew.sh/index.html mac 自带ruby 打开命令行 terminal 输入 : ruby -version 1) 安装命令 ruby -e “$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)” 假如已经安装了 输入如下命令 ruby -e “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)” 命令行输出: 2) brew 使用方法命令行 输入: brew 输出: Example usage: brew [info | home | options ] [FORMULA…] brew install FORMULA… brew uninstall FORMULA… brew search [foo] brew list [FORMULA…] brew update brew upgrade [FORMULA…] brew pin/unpin [FORMULA…] Troubleshooting: brew doctor brew install -vd FORMULA brew [–env | config] Brewing: brew create [URL [–no-fetch]] brew edit [FORMULA…] open https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Formula-Cookbook.md Further help: man brew brew home 3) 安装工具举个栗子: wget 这个工具 输入命令: brew install wget 如图: 4) 卸载拿上面的栗子: wget 工具 输入命令 brew uninstall wget 5) 工具安装的目录Homebrew 会将套件安装到独立目录，并将文件软链接至/usr/local 。 $ cd /usr/local $ find Cellar Cellar/wget/1.16.1 Cellar/wget/1.16.1/bin/wget Cellar/wget/1.16.1/share/man/man1/wget.1 $ ls -l bin bin/wget -&gt; ../Cellar/wget/1.16.1/bin/wget Homebrew 的所有文件均会被安装到预定义目录下，所以无需担心 Homebrew 的安装位置。 6) 其他命令brew list 列出已安装的软件 brew update 更新brew brew home 用浏览器打开brew的官方网站 brew info 显示软件信息 brew deps 显示包依赖 更多命令请看: https://git.io/brew-docs]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[auto open editor test]]></title>
       <url>%2F2017%2F03%2F03%2Fauto-open-editor-test%2F</url>
       <content type="text"></content>
