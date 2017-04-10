@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[Android 读写CSV文件]]></title>
+      <url>%2F2017%2F04%2F10%2Ftest%2F</url>
+      <content type="text"></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Mac安装Homebrew]]></title>
       <url>%2F2017%2F03%2F13%2FMac%E5%AE%89%E8%A3%85Homebrew%2F</url>
       <content type="text"><![CDATA[Mac安装Homebrewbrew 全称Homebrew 是Mac OSX上的软件包管理工具Homebrew 安装和卸载工具 只用一行命令就能完成官方地址: http://brew.sh/index.htmlmac 自带ruby打开命令行 terminal输入 : ruby -version命令行输出:1) 安装命令 ruby -e “$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)”假如已经安装了 输入如下命令 ruby -e “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)”命令行输出:2) brew 使用方法命令行 输入: brew输出:3) 安装工具举个栗子: Mongodb 这个工具输入命令: brew install Mongodb如图:4) 卸载拿上面的栗子: Mongodb 工具输入命令 brew uninstall Mongodb5) 工具安装的目录Homebrew 会将套件安装到独立目录，并将文件软链接至/usr/local 。 $ cd /usr/local $ find Cellar Cellar/wget/1.16.1 Cellar/wget/1.16.1/bin/wget Cellar/wget/1.16.1/share/man/man1/wget.1 $ ls -l bin bin/wget -&gt; ../Cellar/wget/1.16.1/bin/wgetHomebrew 的所有文件均会被安装到预定义目录下，所以无需担心 Homebrew 的安装位置。6) 其他命令brew list 列出已安装的软件brew update 更新brewbrew home 用浏览器打开brew的官方网站brew info 显示软件信息brew deps 显示包依赖更多命令请看: https://git.io/brew-docs7)安装过程中遇到的问题brew安装应用的时候碰上“curl: (7) couldn’t connect to host 的问题”,可以使用代理，让curl通过代理来访问。编辑$HOME/.curlrc文件，增加“–socks5 127.0.0.1:1080”即可（替换成你自己的代理），这样你在brew install安装的时候，相应curl就会通过socks代理访问，从而成功下载完成安装。方便简单，就是你需要自己设置一个socks代理。]]></content>
