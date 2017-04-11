@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.liminwu.me/"/>
-  <updated>2017-04-10T08:45:54.000Z</updated>
+  <updated>2017-04-11T01:37:28.000Z</updated>
   <id>http://www.liminwu.me/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>Android 读写CSV文件</title>
-    <link href="http://www.liminwu.me/2017/04/10/Android%20%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6/"/>
-    <id>http://www.liminwu.me/2017/04/10/Android 读写CSV文件/</id>
+    <link href="http://www.liminwu.me/post/Android%20%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html"/>
+    <id>http://www.liminwu.me/post/Android 读写CSV文件.html</id>
     <published>2017-04-10T06:20:21.000Z</published>
-    <updated>2017-04-10T08:45:54.000Z</updated>
+    <updated>2017-04-11T01:37:28.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="需求背景："><a href="#需求背景：" class="headerlink" title="需求背景："></a>需求背景：</h2><p>   最近在做项目过程中，有以下需求：将用户的交易数据写入到本地文件中，并保存为.csv文件格式，以便导出时供用户查看。</p>
 <h2 id="何为-csv文件？"><a href="#何为-csv文件？" class="headerlink" title="何为.csv文件？"></a>何为.csv文件？</h2><p>   csv文件是以逗号分割的数据仓储，读取数据时从每一行中读取一条数据元祖，也就是一条数据，再用字符分割的方式获取表中的每一个数据项。</p>
@@ -60,8 +60,8 @@
   
   <entry>
     <title>Mac安装Homebrew</title>
-    <link href="http://www.liminwu.me/2017/03/13/Mac%E5%AE%89%E8%A3%85Homebrew/"/>
-    <id>http://www.liminwu.me/2017/03/13/Mac安装Homebrew/</id>
+    <link href="http://www.liminwu.me/post/Mac%E5%AE%89%E8%A3%85Homebrew.html"/>
+    <id>http://www.liminwu.me/post/Mac安装Homebrew.html</id>
     <published>2017-03-12T16:23:57.000Z</published>
     <updated>2017-04-10T06:27:58.000Z</updated>
     
@@ -93,8 +93,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://www.liminwu.me/2017/01/17/hello-world/"/>
-    <id>http://www.liminwu.me/2017/01/17/hello-world/</id>
+    <link href="http://www.liminwu.me/post/hello-world.html"/>
+    <id>http://www.liminwu.me/post/hello-world.html</id>
     <published>2017-01-17T07:08:53.000Z</published>
     <updated>2017-01-17T07:08:53.000Z</updated>
     
