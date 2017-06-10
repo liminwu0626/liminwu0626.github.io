@@ -86,52 +86,38 @@
 
 
 
-<meta name="description" content="自定义控件
-Android自身带的控件不能满足需求, 需要根据自己的需求定义控件.
-
-自定义控件可以分为三大类型1. 组合已有的控件实现
-优酷菜单
-1. 在xml布局里摆放好, OK
-2. 给指定控件添加点击事件. OK
-3. 根据业务逻辑,执行动画(旋转动画: 补间动画). OK
-4. 菜单按钮的截获. OK
-
-轮播图广告
-1. 让图片滑动起来(ViewPager), OK
-2. 让图片和文字,">
+<meta name="description" content="需求背景：   最近在做项目过程中，有以下需求：将用户的交易数据写入到本地文件中，并保存为.csv文件格式，以便导出时供用户查看。
+何为.csv文件？   csv文件是以逗号分割的数据仓储，读取数据时从每一行中读取一条数据元祖，也就是一条数据，再用字符分割的方式获取表中的每一个数据项。
+文件读写   首先来简单说下 Android 的文件读写。说到文件的存储，就要涉及到内部存储（internal">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android自定义控件">
-<meta property="og:url" content="http://www.liminwu.me/post/Android自定义控件.html">
+<meta property="og:title" content="Android 读写CSV文件">
+<meta property="og:url" content="http://www.liminwu.me/post/Android读写CSV文件.html">
 <meta property="og:site_name" content="念君的个人站点">
-<meta property="og:description" content="自定义控件
-Android自身带的控件不能满足需求, 需要根据自己的需求定义控件.
-
-自定义控件可以分为三大类型1. 组合已有的控件实现
-优酷菜单
-1. 在xml布局里摆放好, OK
-2. 给指定控件添加点击事件. OK
-3. 根据业务逻辑,执行动画(旋转动画: 补间动画). OK
-4. 菜单按钮的截获. OK
-
-轮播图广告
-1. 让图片滑动起来(ViewPager), OK
-2. 让图片和文字,">
-<meta property="og:updated_time" content="2017-04-11T06:00:26.000Z">
+<meta property="og:description" content="需求背景：   最近在做项目过程中，有以下需求：将用户的交易数据写入到本地文件中，并保存为.csv文件格式，以便导出时供用户查看。
+何为.csv文件？   csv文件是以逗号分割的数据仓储，读取数据时从每一行中读取一条数据元祖，也就是一条数据，再用字符分割的方式获取表中的每一个数据项。
+文件读写   首先来简单说下 Android 的文件读写。说到文件的存储，就要涉及到内部存储（internal">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-150933@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-152021@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-154228@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-154018@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-154120@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-154054@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-154149@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-155640@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-155824@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-155848@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-160543@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-161154@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-161555@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-161618@2x.png">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-162148@2x.png">
+<meta property="og:updated_time" content="2017-04-11T01:37:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android自定义控件">
-<meta name="twitter:description" content="自定义控件
-Android自身带的控件不能满足需求, 需要根据自己的需求定义控件.
-
-自定义控件可以分为三大类型1. 组合已有的控件实现
-优酷菜单
-1. 在xml布局里摆放好, OK
-2. 给指定控件添加点击事件. OK
-3. 根据业务逻辑,执行动画(旋转动画: 补间动画). OK
-4. 菜单按钮的截获. OK
-
-轮播图广告
-1. 让图片滑动起来(ViewPager), OK
-2. 让图片和文字,">
+<meta name="twitter:title" content="Android 读写CSV文件">
+<meta name="twitter:description" content="需求背景：   最近在做项目过程中，有以下需求：将用户的交易数据写入到本地文件中，并保存为.csv文件格式，以便导出时供用户查看。
+何为.csv文件？   csv文件是以逗号分割的数据仓储，读取数据时从每一行中读取一条数据元祖，也就是一条数据，再用字符分割的方式获取表中的每一个数据项。
+文件读写   首先来简单说下 Android 的文件读写。说到文件的存储，就要涉及到内部存储（internal">
+<meta name="twitter:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170410-150933@2x.png">
 
 
 
@@ -159,13 +145,13 @@ Android自身带的控件不能满足需求, 需要根据自己的需求定义�
 
 
 
-  <link rel="canonical" href="http://www.liminwu.me/post/Android自定义控件.html"/>
+  <link rel="canonical" href="http://www.liminwu.me/post/Android读写CSV文件.html"/>
 
 
 
 
 
-  <title> Android自定义控件 | 念君的个人站点 </title>
+  <title> Android 读写CSV文件 | 念君的个人站点 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -331,7 +317,7 @@ Android自身带的控件不能满足需求, 需要根据自己的需求定义�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.liminwu.me/post/Android自定义控件.html">
+  <link itemprop="mainEntityOfPage" href="http://www.liminwu.me/post/Android读写CSV文件.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="limin wu">
@@ -355,7 +341,7 @@ Android自身带的控件不能满足需求, 需要根据自己的需求定义�
             
             
               
-                Android自定义控件
+                Android 读写CSV文件
               
             
           </h1>
@@ -370,8 +356,8 @@ Android自身带的控件不能满足需求, 需要根据自己的需求定义�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-11T13:59:15+08:00">
-                2017-04-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-10T14:20:21+08:00">
+                2017-04-10
               </time>
             
 
@@ -389,8 +375,8 @@ Android自身带的控件不能满足需求, 需要根据自己的需求定义�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/post/Android自定义控件.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="post/Android自定义控件.html" itemprop="commentCount"></span>
+                <a href="/post/Android读写CSV文件.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="post/Android读写CSV文件.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -400,7 +386,7 @@ Android自身带的控件不能满足需求, 需要根据自己的需求定义�
 
           
           
-             <span id="/post/Android自定义控件.html" class="leancloud_visitors" data-flag-title="Android自定义控件">
+             <span id="/post/Android读写CSV文件.html" class="leancloud_visitors" data-flag-title="Android 读写CSV文件">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -432,142 +418,27 @@ Android自身带的控件不能满足需求, 需要根据自己的需求定义�
       
 
       
-        <h1 id="自定义控件"><a href="#自定义控件" class="headerlink" title="自定义控件"></a>自定义控件</h1><ul>
-<li>Android自身带的控件不能满足需求, 需要根据自己的需求定义控件.</li>
-</ul>
-<h2 id="自定义控件可以分为三大类型"><a href="#自定义控件可以分为三大类型" class="headerlink" title="自定义控件可以分为三大类型"></a>自定义控件可以分为三大类型</h2><h3 id="1-组合已有的控件实现"><a href="#1-组合已有的控件实现" class="headerlink" title="1. 组合已有的控件实现"></a>1. 组合已有的控件实现</h3><ul>
-<li><p>优酷菜单</p>
-<pre><code>1. 在xml布局里摆放好, OK
-2. 给指定控件添加点击事件. OK
-3. 根据业务逻辑,执行动画(旋转动画: 补间动画). OK
-4. 菜单按钮的截获. OK
-</code></pre></li>
-<li><p>轮播图广告</p>
-<pre><code>1. 让图片滑动起来(ViewPager), OK
-2. 让图片和文字,指示器对应起来, OK
-3. 让轮播器无限循环
-
-    向右无限循环  
-        0 -&gt; 4    newPosition = position % 5  
-        5 -&gt; 0  
-        6 -&gt; 1  
-        7 -&gt; 2  
-        8 -&gt; 3  
-        9 -&gt; 4  
-       10 -&gt; 0  
-    向左无限循环  
-        设置到中间某个位置.        
-4. 轮播器自动轮询, OK        
-</code></pre></li>
-<li><p>下拉选择框</p>
-</li>
-</ul>
+        <h2 id="需求背景："><a href="#需求背景：" class="headerlink" title="需求背景："></a>需求背景：</h2><p>   最近在做项目过程中，有以下需求：将用户的交易数据写入到本地文件中，并保存为.csv文件格式，以便导出时供用户查看。</p>
+<h2 id="何为-csv文件？"><a href="#何为-csv文件？" class="headerlink" title="何为.csv文件？"></a>何为.csv文件？</h2><p>   csv文件是以逗号分割的数据仓储，读取数据时从每一行中读取一条数据元祖，也就是一条数据，再用字符分割的方式获取表中的每一个数据项。</p>
+<h2 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h2><p>   首先来简单说下 Android 的文件读写。说到文件的存储，就要涉及到内部存储（internal storage）和外部存储（external storage）。</p>
+<h3 id="内部存储："><a href="#内部存储：" class="headerlink" title="内部存储："></a>内部存储：</h3><p>   注意内部存储不是内存。内部存储位于系统中很特殊的一个位置，如果你想将文件存储于内部存储中，那么文件默认只能被你的应用访问到，且一个应用所创建的所有文件都在和应用包名相同的目录下。也就是说应用创建于内部存储的文件，与这个应用是关联起来的。<strong>当一个应用卸载之后，内部存储中的这些文件也被删除</strong>。从技术上来讲如果你在创建内部存储文件的时候将文件属性设置成可读，其他app能够访问自己应用的数据，前提是他知道你这个应用的包名，如果一个文件的属性是私有（private），那么即使知道包名其他应用也无法访问。 内部存储空间十分有限，因而显得可贵，另外，它也是系统本身和系统应用程序主要的数据存储所在地，一旦内部存储空间耗尽，手机也就无法使用了。所以对于内部存储空间，我们要尽量避免使用。Shared Preferences和SQLite数据库都是存储在内部存储空间上的。内部存储一般用Context来获取和操作。<br>   getFilesDir()获取app的内部存储空间，相当于应用在内部存储上的根目录。<br>   如果是要创建一个文件，如下：<br>   <img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-150933@2x.png" alt="img"><br>   Android 为我们提供了一个简便方法’openFileOutput()’来读写应用在内部存储空间上的文件，下面是向文件中写入文件的例子：<br>   <img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-152021@2x.png" alt="img"><br>   总结一下文件相关操作，可以得出以下三个特点：</p>
 <ul>
-<li><p>Button或ImageButton等自带按钮功能的控件会抢夺所在Layout的焦点.导致其他区域点击不生效.在所在layout声明一个属性</p>
-<pre><code>android:descendantFocusability=&quot;blocksDescendants&quot;
-</code></pre></li>
-<li><p>popupwindow获取焦点, 外部可点击</p>
-<pre><code>    // 设置点击外部区域, 自动隐藏
-popupWindow.setOutsideTouchable(true); // 外部可触摸
-popupWindow.setBackgroundDrawable(new BitmapDrawable()); // 设置空的背景, 响应点击事件
-
-popupWindow.setFocusable(true); //设置可获取焦点
-</code></pre></li>
+<li>1 文件操作只需要向函数提供文件名，所以程序自己只需要维护文件名即可。</li>
+<li>2 不用自己去创建文件对象和输入、输出流，提供文件名就可以返回File对象或输入输出流。</li>
+<li><p>3 对于路径操作返回的都是文件对象。</p>
+<h3 id="外部存储"><a href="#外部存储" class="headerlink" title="外部存储"></a>外部存储</h3><p>最容易混淆的是外部存储，如果说 PC 上也要区分出外部存储和内部存储的话，那么自带的硬盘算是内部存储，U盘或者移动硬盘算是外部存储，因此我们很容易带着这样的理解去看待安卓手机，认为机身固有存储是内部存储，而扩展的 T 卡是外部存储。比如我们任务 16GB 版本的 Nexus 4有 16G 的内部存储，普通消费者可以这样理解，但是安卓的编程中不能，这 16GB 仍然是外部存储。</p>
+<p>所有的安卓设备都有外部存储和内部存储，这两个名称来源于安卓的早期设备，那个时候的设备内部存储确实是固定的，而外部存储确实是可以像U盘一样移动的。但是在后来的设备中，很多中高端机器都将自己的机身存储扩展到了 8G 以上，他们将存储在概念上分成了”内部internal” 和”外部external” 两部分，但其实都在手机内部。所以不管安卓手机是否有可移动的sdcard，他们总是有外部存储和内部存储。最关键的是，我们都是通过相同的api来访问可移动的sdcard或者手机自带的存储（外部存储）。</p>
+<p>外部存储中的文件是可以被用户或者其他应用程序修改的，有两种类型的文件（或者目录）：</p>
+</li>
+<li><p>公共文件Public files：文件是可以被自由访问，且文件的数据对其他应用或者用户来说都是由意义的，当应用被卸载之后，其卸载前创建的文件仍然保留。比如camera应用，生成的照片大家都能访问，而且camera不在了，照片仍然在。<br>如果想在外存储上放公共文件你可以使用getExternalStoragePublicDirectory()</p>
+</li>
+<li><p>私有文件Private files：其实由于是外部存储的原因即是是这种类型的文件也能被其他程序访问，只不过一个应用私有的文件对其他应用其实是没有访问价值的（恶意程序除外）。外部存储上，应用私有文件的价值在于卸载之后，这些文件也会被删除。类似于内部存储。<br>创建应用私有文件的方法是Context.getExternalFilesDir()。所有应用程序的外部存储的私有文件都放在根目录的Android/data/下，目录形式为/Android/data/<package_name>/</package_name></p>
+<h3 id="getFilesDir，getExternalFilesDir，getExternalStorageDirectory-，getExternalStoragePublicDirectory"><a href="#getFilesDir，getExternalFilesDir，getExternalStorageDirectory-，getExternalStoragePublicDirectory" class="headerlink" title="getFilesDir，getExternalFilesDir，getExternalStorageDirectory ，getExternalStoragePublicDirectory"></a>getFilesDir，getExternalFilesDir，getExternalStorageDirectory ，getExternalStoragePublicDirectory</h3><p>最后为了弄清楚getFilesDir，getExternalFilesDir，getExternalStorageDirectory，getExternalStoragePublicDirectory等android文件操作方法，我将这些方法的执行结果打印出来，看看到底路径是啥样，在activity中执行以下代码：<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-154228@2x.png" alt="img"><br>在log中看到如下结果：<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-154018@2x.png" alt="img"><br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-154120@2x.png" alt="img"><br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-154054@2x.png" alt="img"><br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-154149@2x.png" alt="img"></p>
+<h2 id="csv-文件的读写"><a href="#csv-文件的读写" class="headerlink" title=".csv 文件的读写"></a>.csv 文件的读写</h2><ul>
+<li>1 将.csv文件写入到内存<br>项目需求是在进行充值交易时，为了看到交易前与交易后数据是否成功，所以在交易前先将一些可知的请求参数写入文件当中，首先在主 Activity 中编写以下代码:<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-155640@2x.png" alt="img"><br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-155824@2x.png" alt="img"><br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-155848@2x.png" alt="img"><br>然后将表头数据写入’buffer.append(“交易批次,交易序号,客户名,身份证号,卡号,交易流水,交易原金额,交易金额,交易后金额,交易时间,交易是否成功,是否超时\r\n”);’<br>等交易成功后，再将请求响应获得的数据，追加到上面写入的文件末尾，代码如下：<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-160543@2x.png" alt="img"><br>至此，我们已经将.csv格式的文件写入到本地，预览效果如下：<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-161154@2x.png" alt="img"></li>
+<li>2 读完.csv文件显示到界面上<br>用户在APP交易明细查询中需要显示出文件中保存的数据，所以我们还需要将保存到.csv文件中的内容显示到界面上。代码如下:<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-161555@2x.png" alt="img"><br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-161618@2x.png" alt="img"><br>在读取.csv格式的文件中，用到了第三方解析工具javacsv.jar，可以在网上自行搜索下载到，<br>工具类代码如下:<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-162148@2x.png" alt="img"></li>
 </ul>
-<h3 id="2-完全自定义控件-继承View-ViewGroup"><a href="#2-完全自定义控件-继承View-ViewGroup" class="headerlink" title="2. 完全自定义控件.(继承View, ViewGroup)"></a>2. 完全自定义控件.(继承View, ViewGroup)</h3><ul>
-<li><ol>
-<li><p>自定义开关  </p>
-<blockquote>
-<ul>
-<li><ol>
-<li>写个类继承View, OK</li>
-</ol>
-</li>
-<li><ol>
-<li>拷贝包含包名的全路径到xml中, OK</li>
-</ol>
-</li>
-<li><ol>
-<li>界面中找到该控件, 设置初始信息, OK</li>
-</ol>
-</li>
-<li><ol>
-<li>根据需求绘制界面内容,OK</li>
-</ol>
-</li>
-<li><ol>
-<li>响应用户的触摸事件,OK</li>
-</ol>
-</li>
-<li><ol>
-<li>创建一个状态更新监听.OK</li>
-</ol>
-</li>
-</ul>
-</blockquote>
-<p>// 1. 声明接口对象<br>public interface OnSwitchStateUpdateListener{<br>   // 状态回调, 把当前状态传出去<br>   void onStateUpdate(boolean state);<br>}<br>// 2. 添加设置接口对象的方法, 外部进行调用<br>public void setOnSwitchStateUpdateListener(</p>
-<pre><code>OnSwitchStateUpdateListener onSwitchStateUpdateListener) {
-    this.onSwitchStateUpdateListener = onSwitchStateUpdateListener;
-</code></pre><p>}<br>// 3. 在合适的位置.执行接口的方法<br>onSwitchStateUpdateListener.onStateUpdate(state);</p>
-<p>// 4. 界面/外部, 收到事件.</p>
-<blockquote>
-<ul>
-<li><ol>
-<li>自定义属性</li>
-</ol>
-</li>
-</ul>
-</blockquote>
-<ol>
-<li><p>在attrs.xml声明节点declare-styleable</p>
-<p><declare-styleable name="ToggleView"></declare-styleable></p>
-<pre><code>&lt;attr name=&quot;switch_background&quot; format=&quot;reference&quot; /&gt;
-&lt;attr name=&quot;slide_button&quot; format=&quot;reference&quot; /&gt;
-&lt;attr name=&quot;switch_state&quot; format=&quot;boolean&quot; /&gt;
-</code></pre><p></p>
-</li>
-<li><p>R会自动创建变量</p>
-<p>attr 3个变量<br>styleable 一个int数组, 3个变量(保存位置)</p>
-</li>
-<li><p>在xml配置声明的属性/ 注意添加命名空间</p>
-<p>xmlns:itheima=”<a href="http://schemas.android.com/apk/res/com.itheima74.toggleview" target="_blank" rel="external">http://schemas.android.com/apk/res/com.itheima74.toggleview</a>“</p>
-<p>itheima:switch_background=”@drawable/switch_background”<br>itheima:slide_button=”@drawable/slide_button”<br>itheima:switch_state=”false”</p>
-</li>
-<li><p>在构造函数中获取并使用</p>
-<p>// 获取配置的自定义属性<br>String namespace = “<a href="http://schemas.android.com/apk/res/com.itheima74.toggleview" target="_blank" rel="external">http://schemas.android.com/apk/res/com.itheima74.toggleview</a>“;<br>int switchBackgroundResource = attrs.getAttributeResourceValue(namespace , “switch_background”, -1);</p>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<ul>
-<li>Android 的界面绘制流程</li>
-</ul>
-</blockquote>
-<pre><code>测量             摆放        绘制
-measure    -&gt;    layout    -&gt;    draw
-      |           |             |
-onMeasure -&gt; onLayout -&gt; onDraw 重写这些方法, 实现自定义控件
-
-都在onResume()之后执行
-
-View流程
-onMeasure() (在这个方法里指定自己的宽高) -&gt; onDraw() (绘制自己的内容)
-
-ViewGroup流程
-onMeasure() (指定自己的宽高, 所有子View的宽高)-&gt; onLayout() (摆放所有子View) -&gt; onDraw() (绘制内容)
-</code></pre><ul>
-<li><ol>
-<li>侧滑面板</li>
-</ol>
-</li>
-</ul>
-<h3 id="3-继承已有的控件实现-扩展已有的功能"><a href="#3-继承已有的控件实现-扩展已有的功能" class="headerlink" title="3. 继承已有的控件实现(扩展已有的功能)"></a>3. 继承已有的控件实现(扩展已有的功能)</h3><ul>
-<li><ol>
-<li>包含下拉刷新功能的ListView</li>
-</ol>
+<p>参考:「android中的文件操作详解以及内部存储和外部存储」<br><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2013/0923/1557.html" target="_blank" rel="external">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2013/0923/1557.html</a></p>
 </li>
 </ul>
 
@@ -602,8 +473,8 @@ onMeasure() (指定自己的宽高, 所有子View的宽高)-&gt; onLayout() (摆
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/Android读写CSV文件.html" rel="next" title="Android 读写CSV文件">
-                <i class="fa fa-chevron-left"></i> Android 读写CSV文件
+              <a href="/post/Mac安装Homebrew.html" rel="next" title="Mac安装Homebrew">
+                <i class="fa fa-chevron-left"></i> Mac安装Homebrew
               </a>
             
           </div>
@@ -612,8 +483,8 @@ onMeasure() (指定自己的宽高, 所有子View的宽高)-&gt; onLayout() (摆
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/post/Android 读Excel文件.html" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/post/Android自定义控件.html" rel="prev" title="Android自定义控件">
+                Android自定义控件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -629,10 +500,10 @@ onMeasure() (指定自己的宽高, 所有子View的宽高)-&gt; onLayout() (摆
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="post/Android自定义控件.html"
-     data-title="Android自定义控件"
+        <div class="ds-share flat" data-thread-key="post/Android读写CSV文件.html"
+     data-title="Android 读写CSV文件"
      data-content=""
-     data-url="http://www.liminwu.me/post/Android自定义控件.html">
+     data-url="http://www.liminwu.me/post/Android读写CSV文件.html">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -659,8 +530,8 @@ onMeasure() (指定自己的宽高, 所有子View的宽高)-&gt; onLayout() (摆
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="post/Android自定义控件.html"
-           data-title="Android自定义控件" data-url="http://www.liminwu.me/post/Android自定义控件.html">
+      <div class="ds-thread" data-thread-key="post/Android读写CSV文件.html"
+           data-title="Android 读写CSV文件" data-url="http://www.liminwu.me/post/Android读写CSV文件.html">
       </div>
     
   </div>
@@ -771,7 +642,7 @@ onMeasure() (指定自己的宽高, 所有子View的宽高)-&gt; onLayout() (摆
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义控件"><span class="nav-number">1.</span> <span class="nav-text">自定义控件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义控件可以分为三大类型"><span class="nav-number">1.1.</span> <span class="nav-text">自定义控件可以分为三大类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-组合已有的控件实现"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 组合已有的控件实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-完全自定义控件-继承View-ViewGroup"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 完全自定义控件.(继承View, ViewGroup)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-继承已有的控件实现-扩展已有的功能"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 继承已有的控件实现(扩展已有的功能)</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求背景："><span class="nav-number">1.</span> <span class="nav-text">需求背景：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何为-csv文件？"><span class="nav-number">2.</span> <span class="nav-text">何为.csv文件？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件读写"><span class="nav-number">3.</span> <span class="nav-text">文件读写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内部存储："><span class="nav-number">3.1.</span> <span class="nav-text">内部存储：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部存储"><span class="nav-number">3.2.</span> <span class="nav-text">外部存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getFilesDir，getExternalFilesDir，getExternalStorageDirectory-，getExternalStoragePublicDirectory"><span class="nav-number">3.3.</span> <span class="nav-text">getFilesDir，getExternalFilesDir，getExternalStorageDirectory ，getExternalStoragePublicDirectory</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#csv-文件的读写"><span class="nav-number">4.</span> <span class="nav-text">.csv 文件的读写</span></a></li></ol></div>
             
 
           </div>

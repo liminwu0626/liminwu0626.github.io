@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.liminwu.me/"/>
-  <updated>2017-04-11T06:00:26.000Z</updated>
+  <updated>2017-06-10T06:35:30.000Z</updated>
   <id>http://www.liminwu.me/</id>
   
   <author>
@@ -14,6 +14,146 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://www.liminwu.me/post/Android%20%E8%AF%BBExcel%E6%96%87%E4%BB%B6.html"/>
+    <id>http://www.liminwu.me/post/Android 读Excel文件.html</id>
+    <published>2017-06-10T06:26:50.000Z</published>
+    <updated>2017-06-10T06:35:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Android-读写-Excel-文件"><a href="#Android-读写-Excel-文件" class="headerlink" title="Android 读写 Excel 文件"></a>Android 读写 Excel 文件</h1><blockquote>
+<p>需求背景：最近在做项目过程中，需要读取 Excel 文件，Excel文件可以来自用户插在Android设备上的外接U盘，也可以是保存在项目Assets、 Raw里面。<br>资料参考：查阅了很多相关资料，读取外接U盘主要用到了Android 读取USB文件的第三方开源库<br>[GitHub]（<a href="https://github.com/magnusja/libaums）" target="_blank" rel="external">https://github.com/magnusja/libaums）</a><br>用到的Jar文件 <a href="http://download.csdn.net/detail/liminwu_6/9866577" target="_blank" rel="external">Jar</a><br>读写Asset Raw文件也可以用<a href="http://download.csdn.net/detail/likai22/534250" target="_blank" rel="external">jxl.jar</a><br>本文将从以下两个方面介绍Excel文件的读写</p>
+<ul>
+<li>读写外接 U 盘文件</li>
+<li>读写Android 项目内Assets Raw 下的 Excel 文件<h2 id="Android-读写-U-盘-Excel-文件"><a href="#Android-读写-U-盘-Excel-文件" class="headerlink" title="Android 读写 U 盘 Excel 文件"></a>Android 读写 U 盘 Excel 文件</h2></li>
+<li>首先我们需要注册广播监听外接U盘的插入和拔出<figure class="highlight pony"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">   <span class="comment">//监听OTG插入 拔出</span></div><div class="line">   <span class="type">IntentFilter</span> usbDeviceStateFilter = <span class="function"><span class="keyword">new</span> <span class="title">IntentFilter</span>();			   <span class="title">usbDeviceStateFilter</span>.<span class="title">addAction</span>(<span class="type">UsbManager</span>.<span class="type">ACTION_USB_DEVICE_ATTACHED</span>);</span></div><div class="line">   <span class="title">usbDeviceStateFilter</span>.<span class="title">addAction</span>(<span class="type">UsbManager</span>.<span class="type">ACTION_USB_DEVICE_DETACHED</span>);</div><div class="line">   <span class="title">registerReceiver</span>(mUsbReceiver, usbDeviceStateFilter);</div><div class="line"> <span class="comment">//注册监听自定义广播</span></div><div class="line"> <span class="title">IntentFilter</span> <span class="title">filter</span> = <span class="title">new</span> <span class="title">IntentFilter</span>(<span class="type">ACTION_USB_PERMISSION</span>);</div><div class="line"><span class="title">registerReceiver</span>(mUsbReceiver, filter);</div><div class="line"> ``` </div><div class="line">* 然后重写<span class="title">onReceive</span>()方法</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p>  private BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {<br>        public void onReceive(Context context, Intent intent) {<br>            String action = intent.getAction();<br>            switch (action) {<br>                case ACTION_USB_PERMISSION://接受到自定义广播<br>                    UsbDevice usbDevice = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);<br>                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {  //允许权限申请<br>                        if (usbDevice != null) {  //Do something<br>                            readDevice(getUsbMass(usbDevice));<br>                        } else {</p>
+<pre><code>                    }
+                } else {
+                    setMsg(&quot;用户未授权，读取失败&quot;);
+                }
+                break;
+            case UsbManager.ACTION_USB_DEVICE_ATTACHED://接收到存储设备插入广播
+                UsbDevice device_add = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                if (device_add != null) {
+                    redDeviceList();
+                } else {
+
+                }
+                break;
+            case UsbManager.ACTION_USB_DEVICE_DETACHED://接收到存储设备拔出广播
+                UsbDevice device_remove = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                if (device_remove != null) {
+
+                    usbFiles.clear();//清除
+                    adapter.notifyDataSetChanged();//更新界面
+                   cFolder = null;
+                }
+                break;
+        }
+    }
+};
+</code></pre><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">* </span>接收到有U盘插入之后我们要对U盘设备进行一些初始化相关的操作</div></pre></td></tr></table></figure>
+<p>private void readDevice(UsbMassStorageDevice device) {<br>        // before interacting with a device you need to call init()!<br>        try {<br>            device.init();//初始化<br>//          Only uses the first partition on the device<br>            Partition partition = device.getPartitions().get(0);<br>            FileSystem currentFs = partition.getFileSystem();<br>            //fileSystem.getVolumeLabel()可以获取到设备的标识<br>            //通过FileSystem可以获取当前U盘的一些存储信息，包括剩余空间大小，容量等等<br>            // Log.d(TAG, “Capacity: “ + currentFs.getCapacity());<br>            // Log.d(TAG, “Occupied Space: “ + currentFs.getOccupiedSpace());<br>            // Log.d(TAG, “Free Space: “ + currentFs.getFreeSpace());<br>            // Log.d(TAG, “Chunk size: “ + currentFs.getChunkSize());<br>            UsbFile root = currentFs.getRootDirectory();//获取根目录<br>            deviceName = currentFs.getVolumeLabel();//获取设备标签<br>            mMainTvTitle.setText(deviceName);//设置标题<br>            cFolder = root;//设置当前文件对象<br>            addFile2List();//添加文件<br>        } catch (Exception e) {<br>            e.printStackTrace();<br>            setMsg(“读取失败，异常：” + e.getMessage());<br>        }<br>    }<br>    private void redDeviceList() {<br>        UsbManager usbManager = (UsbManager) getSystemService(Context.USB_SERVICE);<br>        //获取存储设备<br>        storageDevices = UsbMassStorageDevice.getMassStorageDevices(this);<br>        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);<br>        for (UsbMassStorageDevice device : storageDevices) {//可能有几个 一般只有一个 因为大部分手机只有1个otg插口<br>            if (usbManager.hasPermission(device.getUsbDevice())) {//有就直接读取设备是否有权限<br>                readDevice(device);<br>            } else {//没有就去发起意图申请<br>                usbManager.requestPermission(device.getUsbDevice(), pendingIntent); //该代码执行后，系统弹出一个对话框，<br>            }<br>        }<br>        if (storageDevices.length == 0)<br>            setMsg(“请插入U盘读取xxx”);<br>    }<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">* </span>当Android设备读取到U盘文件后，会显示出所有的文件夹及文件，因为我们只能对Excel文件进行操作处理，所以还要对用户选择的文件做判断处理</div></pre></td></tr></table></figure></p>
+<p> @Override<br>    public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {<br>    //点击item 进入该目录<br>        final UsbFile file = usbFiles.get(position);<br>        d(file.getName());<br>        if (file.isDirectory()) {//如果是文件夹<br>            cFolder = file;<br>            mMainTvTitle.append(“/“ + cFolder.getName());<br>            addFile2List();<br>        } else {<br>            if (file.getName().startsWith(“._”)) {<br>                toastShort(“请选择正确的Excel文件”);<br>                return;<br>            }<br>            if (file.getName().endsWith(“.xls”) || file.getName().endsWith(“.xlsx”)) {<br>                //设置视图<br>                dialog_wait.setMessage(“正在读取” + file.getName() + “…”);<br>                dialog_wait.show();<br>                //执行线程<br>                executorService.execute(new Runnable() {<br>                    @Override<br>                    public void run() {<br>                        try {<br>                            Looper.prepare();<br>                            ExcelUtils.readFromExcel(file, mHandler);<br>                            Looper.loop();<br>                        } catch (final Exception e) {<br>                            e.printStackTrace();<br>                            runOnUiThread(new Runnable() {<br>                                @Override<br>                                public void run() {<br>                                    dialog_wait.dismiss();<br>                                }<br>                            });<br>                        }<br>                    }<br>                });<br>            } else {<br>                toastShort(“请选择Excel文件进行操作”);<br>                return;<br>            }</p>
+<pre><code>    }
+}
+</code></pre><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">* </span>接下来我们就需要对选择的Excel文件进行读取操作</div></pre></td></tr></table></figure>
+<p>  public static void readFromExcel(final UsbFile fileAbsolutePath, final Handler handler) throws IOException {<br>        new Thread(new Runnable() {<br>            @Override<br>            public void run() {<br>                /**</p>
+<pre><code> * 读取Excel表中的所有数据
+ */
+Workbook workbook = null;
+try {
+    workbook = getWeebWork(fileAbsolutePath);
+} catch (IOException e) {
+    e.printStackTrace();
+}
+Logger.d(&quot;总表页数为：&quot; + workbook.getNumberOfSheets());// 获取表页数
+Sheet sheet = workbook.getSheetAt(0);
+int sheetNum = workbook.getNumberOfSheets();
+int sheetRows = sheet.getLastRowNum();
+
+Logger.d(&quot;the num of sheets is &quot; + sheetNum);
+Logger.d(&quot;the name of sheet is  &quot; + sheet.getSheetName());
+Logger.d(&quot;total rows is 行=&quot; + sheetRows);
+// Sheet sheet = workbook.getSheetAt(1);
+int rownum = sheet.getLastRowNum();// 获取总行数
+Logger.d(rownum);
+double sum = 0;
+List&lt;SubsidyEntity&gt; subsidyEntities = new ArrayList&lt;SubsidyEntity&gt;();
+for (int i = 1; i &lt;= rownum; i++) {//21
+    Row row = sheet.getRow(i);
+    int columns = row.getLastCellNum();// 总列数
+    Logger.t(&quot;总列数&quot;).d(columns);
+    for (int j = row.getFirstCellNum(); j &lt; row.getLastCellNum(); j++) {
+        Cell celldata = row.getCell(j);
+        Logger.t(&quot;getColumnIndex&quot;).d(celldata.getColumnIndex());
+        Logger.t(&quot;cellData&quot;).d(celldata);
+        SubsidyEntity subsidyEntity = new SubsidyEntity();
+        switch (celldata.getColumnIndex()) {
+            //证件号码
+            case 0:
+</code></pre><p>//                                subsidyEntity.setSubsidyIDNo(celldata.toString());<br>                                Logger.t(“证件号码”).d(celldata.toString());<br>                                break;<br>                            //用户姓名<br>                            case 1:<br>//                                subsidyEntity.setSubsidyName(celldata.toString());<br>                                Logger.t(“用户姓名”).d(celldata.toString());<br>                                break;<br>                            //补贴金额<br>                            case 2:<br>                                subsidyEntity.setSubsidyAmt(celldata.toString());<br>                                Logger.t(“补贴金额”).d(celldata.toString());<br>                                subsidyEntities.add(subsidyEntity);<br>                                break;<br>                            case 3:<br>                                break;<br>                        }<br>                    }<br>                }<br>                for (int j = 0; j &lt; subsidyEntities.size(); j++) {<br>                    Logger.d(subsidyEntities.size());<br>                    SubsidyEntity cellData = subsidyEntities.get(j);<br>                    Logger.d(cellData.getSubsidyAmt());<br>                    sum += Double.valueOf(String.valueOf(cellData.getSubsidyAmt()));<br>                    Logger.d(sum);<br>                }<br>                Message msg = Message.obtain();<br>                msg.arg1 = rownum;<br>                msg.arg2 = (int) sum;<br>                msg.what = Constants.MSG_GET_DATA_FROM_EXCEL_SUCCESS;<br>                handler.sendMessage(msg);<br>//                BigDecimal big = new BigDecimal(cellData.getNumericCellValue());//将科学计数法表示的数据转化为String类型<br>//                        Logger.d(“\t” + String.valueOf(big));<br>            }<br>        }).start();<br>    }<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* 当传入Excel文件名后需要对当前文件是Excel <span class="number">2003</span>还是Excel <span class="number">2007</span>进行处理</div></pre></td></tr></table></figure></p>
+<p>/**</p>
+<pre><code> * @param filename
+ * @return
+ * @throws IOException
+ * @Title: getWeebWork
+ * @Description: TODO(根据传入的文件名获取工作簿对象(Workbook))
+ */
+public static Workbook getWeebWork(UsbFile filename) throws IOException {
+    Workbook workbook = null;
+    if (null != filename) {
+        String fileType = filename.getName().substring(filename.getName().lastIndexOf(&quot;.&quot;), filename.getName().length());
+</code></pre><p>//            FileInputStream fileStream = new FileInputStream(new File(filename));<br>            if (“.xls”.equals(fileType.trim().toLowerCase())) {<br>//                workbook = new HSSFWorkbook(new UsbFileInputStream(filename));<br>                // or buffered (may increase performance)<br>//                workbook = new HSSFWorkbook(UsbFileStreamFactory.createBufferedOutputStream(filename, currentFs));<br>                // if you don’t have the current fs this should be fine as well<br>                workbook = new HSSFWorkbook(new BufferedInputStream(new UsbFileInputStream(filename)));<br>            } else if (“.xlsx”.equals(fileType.trim().toLowerCase())) {<br>                workbook = new XSSFWorkbook(new BufferedInputStream(new UsbFileInputStream(filename)));<br>            }<br>        }<br>        return workbook;<br>    }<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">* </span>通过Handler消息处理机制，将我们在子线程获取到的Excel文件在主线程进行处理</div></pre></td></tr></table></figure></p>
+<p>   private class MyHandler extends Handler {<br>        //对Activity的弱引用<br>        private final WeakReference<subsidyreleaseactivity> mActivity;</subsidyreleaseactivity></p>
+<pre><code>    public MyHandler(SubsidyReleaseActivity activity) {
+        mActivity = new WeakReference&lt;SubsidyReleaseActivity&gt;(activity);
+    }
+
+    @Override
+    public void handleMessage(Message msg) {
+        SubsidyReleaseActivity activity = mActivity.get();
+        if (activity == null) {
+            super.handleMessage(msg);
+            return;
+        }
+        switch (msg.what) {
+            case Constants.MSG_GET_DATA_FROM_EXCEL_SUCCESS:
+                subsidyTotalAmt = msg.arg2;//总行数
+                subsidyTotalCount = msg.arg1;
+                dialog_wait.dismiss();
+                Logger.t(&quot;补助总笔数&quot;).d(subsidyTotalCount);
+                Logger.t(&quot;补助总金额&quot;).d(subsidyTotalAmt);
+                break;
+        }
+    }
+}
+</code></pre><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">* </span>最后我们在页面销毁时，注销广播，关闭USB设备</div></pre></td></tr></table></figure>
+<p>   @Override<br>    protected void onDestroy() {<br>        super.onDestroy();<br>        if (mUsbReceiver != null) {//有注册就有注销<br>            unregisterReceiver(mUsbReceiver);<br>            mUsbReceiver = null;<br>        }<br>        if (sb != null) {<br>            sb.unsubscribe();<br>        }<br>        if (storageDevices != null) {<br>            for (UsbMassStorageDevice device : storageDevices) {<br>                device.close();<br>                storageDevices = null;<br>            }<br>        }<br>    }<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">## <span class="selector-tag">Android</span> 读取<span class="selector-tag">Assets</span> 下的<span class="selector-tag">Excel</span>文件</div><div class="line">&gt; 在我们做项目过程中，项目内测时，需要白名单控制，白名单实现的一种方案就是把用户的登录名电话号码作为白名单，如果不在白名单内则提示无法登录。此时，我们的白名单用户列表保存在<span class="selector-tag">Excel</span>文件中，我们可以把<span class="selector-tag">Excel</span>文件保存到<span class="selector-tag">Assets</span>下进行读取。</div><div class="line"></div><div class="line">* 首先需要把编辑好的<span class="selector-tag">Excel</span>文件放到<span class="selector-tag">main</span>目录下的<span class="selector-tag">assets</span>下。（如果位置放错则读取不到）</div><div class="line">  !<span class="selector-attr">[]</span>()&#123;<span class="attribute">http</span>://ome4apvpf.bkt.clouddn.com/WX20170610-<span class="number">141311</span>@<span class="number">2</span>x.png&#125;</div><div class="line"></div><div class="line">* 然后通过子线程来读取<span class="selector-tag">Excel</span>文件内容</div></pre></td></tr></table></figure></p>
+<p> public static void getWhiteList(final Context context, final Handler handler) {<br>        new Thread(new Runnable() {<br>            @Override<br>            public void run() {<br>                ArrayList<whitelistinfo> whitesList = new ArrayList<whitelistinfo>();<br>                AssetManager assetManager = context.getAssets();<br>                try {<br>                    InputStream fileStream = new BufferedInputStream(assetManager.open(“whitelist.xls”));<br>                    Workbook workbook = Workbook.getWorkbook(fileStream);<br>                    Sheet sheet = workbook.getSheet(0);<br>                    int sheetNum = workbook.getNumberOfSheets();<br>                    int sheetRows = sheet.getRows();<br>                    int sheetColumns = sheet.getColumns();<br>                    Log.d(TAG, “the num of sheets is “ + sheetNum);<br>                    Log.d(TAG, “the name of sheet is  “ + sheet.getName());<br>                    Log.d(TAG, “total rows is 行=” + sheetRows);<br>                    Log.d(TAG, “total cols is 列=” + sheetColumns);<br>                    for (int i = 0; i &lt; sheetRows; i++) {<br>                        WhiteListInfo whitesListPhone = new WhiteListInfo();<br>                        whitesListPhone.setPhoneNo(sheet.getCell(0, i).getContents());<br>                        whitesList.add(whitesListPhone);<br>                    }<br>                    workbook.close();<br>                } catch (Exception e) {<br>                    Log.e(TAG, “read error=” + e, e);<br>                }<br>                Message msg = Message.obtain();<br>                msg.obj = whitesList;<br>                msg.what = NetUrls.MSG_GET_WHITE_LIST_SUCC;<br>                // 发送这个消息到消息队列中<br>                handler.sendMessage(msg);</whitelistinfo></whitelistinfo></p>
+<pre><code>        }
+    }).start();
+}
+</code></pre><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">* </span>这里我们提前知道了Excel文件里面的内容，我这里只有一个电话号码列，所以要定义好相应的实体类 WhiteListInfo，将我们读取到的所以电话号码保存到List集合当中。</div><div class="line"></div><div class="line"><span class="bullet">* </span>在主线程获取到我们读取的内容</div></pre></td></tr></table></figure>
+<p>  private void getWhiteListFromAsset() {<br>        handler = new Handler() {<br>            @Override<br>            public void handleMessage(Message msg) {<br>                super.handleMessage(msg);<br>                // 请求用户信息成功<br>                if (msg.what == NetUrls.MSG_GET_WHITE_LIST_SUCC) {<br>                    boolean isWhite = false;<br>                    whitesList = (ArrayList<whitelistinfo>) msg.obj;<br>                    for (WhiteListInfo whiteNo : whitesList) {<br>                        LogUtil.i(“白名单”, whiteNo.getPhoneNo());<br>                        if (whiteNo.getPhoneNo().equals(currentMobileNo)) {<br>                            isWhite = true;<br>                        }<br>                    }<br>                    dismissProgressDialog();<br>                    if (checkWhite &amp;&amp; !isWhite) {<br>                        new AlertDialog.Builder(MainActivity.this)<br>                                .setTitle(“提示”)<br>                                .setMessage(“您的账号未在测试白名单内！”)<br>                                .setPositiveButton(“确定”, new DialogInterface.OnClickListener() {<br>                                    @Override<br>                                    public void onClick(DialogInterface dialog, int which) {<br>                                        finish();<br>                                    }<br>                                })<br>                                .setCancelable(false)<br>                                .create()<br>                                .show();<br>                        return;<br>                    }<br>                    if (!isFirstRun) {<br>                        String preMobileNo = BankInfoUtils.getUserInfo(MainActivity.this).getMobileNo();<br>                        LogUtil.i(“bankInfo:”, currentMobileNo + “;” + preMobileNo);<br>                        if (!currentMobileNo.equals(preMobileNo)) {<br>                            Intent intent = new Intent(MainActivity.this, ChangeAccountActivity.class);<br>                            startActivity(intent);<br>                            finish();<br>                            return;<br>                        }<br>                    }<br>                    sharedPreferences.edit().putBoolean(“isFirstRun”, false).apply();<br>                    SharedPreferencesUtil.setPreferenceValue(MainActivity.this, “cipherText”, cipherText);<br>                    initUI();<br>                    initData();<br>                    initView();<br>                    initEvent();<br>                }<br>            }<br>        };<br>        HttpUtil.getWhiteList(this, handler);<br>    }<br>```</whitelistinfo></p>
+<ul>
+<li>注意事项：在读取Excel文件时有可能会遇到下面的错误<br><code>jxl.read.biff.BiffException: Unable to recognize OLE stream</code><br>这是因为因为文件是Excel2007，而jxl解析07会报上述异常，也就是jxl可以处理Excel2003。只需要原文件另存为2003文 件即可</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Android-读写-Excel-文件&quot;&gt;&lt;a href=&quot;#Android-读写-Excel-文件&quot; class=&quot;headerlink&quot; title=&quot;Android 读写 Excel 文件&quot;&gt;&lt;/a&gt;Android 读写 Excel 文件&lt;/h1&gt;&lt;bloc
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Android自定义控件</title>
@@ -178,8 +318,8 @@ onMeasure() (指定自己的宽高, 所有子View的宽高)-&gt; onLayout() (摆
   
   <entry>
     <title>Android 读写CSV文件</title>
-    <link href="http://www.liminwu.me/post/Android%20%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html"/>
-    <id>http://www.liminwu.me/post/Android 读写CSV文件.html</id>
+    <link href="http://www.liminwu.me/post/Android%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html"/>
+    <id>http://www.liminwu.me/post/Android读写CSV文件.html</id>
     <published>2017-04-10T06:20:21.000Z</published>
     <updated>2017-04-11T01:37:28.000Z</updated>
     
