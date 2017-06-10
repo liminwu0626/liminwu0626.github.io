@@ -94,11 +94,13 @@
 <meta property="og:site_name" content="念君的个人站点">
 <meta property="og:description" content="Android 读写 Excel 文件
 需求背景：最近在做项目过程中，需要读取 Excel 文件，Excel文件可以来自用户插在Android设备上的外接U盘，也可以是保存在项目Assets、 Raw里面。资料参考：查阅了很多相关资料，读取外接U盘主要用到了Android 读取USB文件的第三方开源库[GitHub]（https://github.com/magnusja/libaums）用到的J">
-<meta property="og:updated_time" content="2017-06-10T06:44:08.000Z">
+<meta property="og:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170610-141311@2x.png">
+<meta property="og:updated_time" content="2017-06-10T06:51:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 读写 Excel文件">
 <meta name="twitter:description" content="Android 读写 Excel 文件
 需求背景：最近在做项目过程中，需要读取 Excel 文件，Excel文件可以来自用户插在Android设备上的外接U盘，也可以是保存在项目Assets、 Raw里面。资料参考：查阅了很多相关资料，读取外接U盘主要用到了Android 读取USB文件的第三方开源库[GitHub]（https://github.com/magnusja/libaums）用到的J">
+<meta name="twitter:image" content="http://ome4apvpf.bkt.clouddn.com/WX20170610-141311@2x.png">
 
 
 
@@ -434,8 +436,10 @@
 <p>在我们做项目过程中，项目内测时，需要白名单控制，白名单实现的一种方案就是把用户的登录名电话号码作为白名单，如果不在白名单内则提示无法登录。此时，我们的白名单用户列表保存在Excel文件中，我们可以把Excel文件保存到Assets下进行读取。</p>
 </blockquote>
 <ul>
-<li><p>首先需要把编辑好的Excel文件放到main目录下的assets下。（如果位置放错则读取不到）<br><img src="" alt="">{<a href="http://ome4apvpf.bkt.clouddn.com/WX20170610-141311@2x.png}" target="_blank" rel="external">http://ome4apvpf.bkt.clouddn.com/WX20170610-141311@2x.png}</a></p>
-</li>
+<li>首先需要把编辑好的Excel文件放到main目录下的assets下。（如果位置放错则读取不到）</li>
+</ul>
+<p><img src="http://ome4apvpf.bkt.clouddn.com/WX20170610-141311@2x.png" alt=""></p>
+<ul>
 <li><p>然后通过子线程来读取Excel文件内容</p>
 <figure class="highlight plain"><figcaption><span>static void getWhiteList(final Context context, final Handler handler) &#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">    new Thread(new Runnable() &#123;</div><div class="line">        @Override</div><div class="line">        public void run() &#123;</div><div class="line">            ArrayList&lt;WhiteListInfo&gt; whitesList = new ArrayList&lt;WhiteListInfo&gt;();</div><div class="line">            AssetManager assetManager = context.getAssets();</div><div class="line">            try &#123;</div><div class="line">                InputStream fileStream = new BufferedInputStream(assetManager.open(&quot;whitelist.xls&quot;));</div><div class="line">                Workbook workbook = Workbook.getWorkbook(fileStream);</div><div class="line">                Sheet sheet = workbook.getSheet(0);</div><div class="line">                int sheetNum = workbook.getNumberOfSheets();</div><div class="line">                int sheetRows = sheet.getRows();</div><div class="line">                int sheetColumns = sheet.getColumns();</div><div class="line">                Log.d(TAG, &quot;the num of sheets is &quot; + sheetNum);</div><div class="line">                Log.d(TAG, &quot;the name of sheet is  &quot; + sheet.getName());</div><div class="line">                Log.d(TAG, &quot;total rows is 行=&quot; + sheetRows);</div><div class="line">                Log.d(TAG, &quot;total cols is 列=&quot; + sheetColumns);</div><div class="line">                for (int i = 0; i &lt; sheetRows; i++) &#123;</div><div class="line">                    WhiteListInfo whitesListPhone = new WhiteListInfo();</div><div class="line">                    whitesListPhone.setPhoneNo(sheet.getCell(0, i).getContents());</div><div class="line">                    whitesList.add(whitesListPhone);</div><div class="line">                &#125;</div><div class="line">                workbook.close();</div><div class="line">            &#125; catch (Exception e) &#123;</div><div class="line">                Log.e(TAG, &quot;read error=&quot; + e, e);</div><div class="line">            &#125;</div><div class="line">            Message msg = Message.obtain();</div><div class="line">            msg.obj = whitesList;</div><div class="line">            msg.what = NetUrls.MSG_GET_WHITE_LIST_SUCC;</div><div class="line">            // 发送这个消息到消息队列中</div><div class="line">            handler.sendMessage(msg);</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;).start();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
