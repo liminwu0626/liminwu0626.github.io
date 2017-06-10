@@ -1,28 +1,405 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>念君的个人站点</title>
-  <subtitle>生命的意义，不在于追求什么，而在于我们是不是永远在追求的路上。</subtitle>
-  <link href="/atom.xml" rel="self"/>
+<!doctype html>
+
+
+
   
-  <link href="http://www.liminwu.me/"/>
-  <updated>2017-06-10T06:44:08.000Z</updated>
-  <id>http://www.liminwu.me/</id>
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
   
-  <author>
-    <name>limin wu</name>
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
     
-  </author>
-  
-  <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Android 读写 Excel文件</title>
-    <link href="http://www.liminwu.me/post/Android%20%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6.html"/>
-    <id>http://www.liminwu.me/post/Android 读写Excel文件.html</id>
-    <published>2017-06-10T06:39:34.000Z</published>
-    <updated>2017-06-10T06:44:08.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Android-读写-Excel-文件"><a href="#Android-读写-Excel-文件" class="headerlink" title="Android 读写 Excel 文件"></a>Android 读写 Excel 文件</h1><blockquote>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="念君的个人站点" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Android 读写 Excel 文件
+需求背景：最近在做项目过程中，需要读取 Excel 文件，Excel文件可以来自用户插在Android设备上的外接U盘，也可以是保存在项目Assets、 Raw里面。资料参考：查阅了很多相关资料，读取外接U盘主要用到了Android 读取USB文件的第三方开源库[GitHub]（https://github.com/magnusja/libaums）用到的J">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 读写 Excel文件">
+<meta property="og:url" content="http://www.liminwu.me/post/Android 读写Excel文件.html">
+<meta property="og:site_name" content="念君的个人站点">
+<meta property="og:description" content="Android 读写 Excel 文件
+需求背景：最近在做项目过程中，需要读取 Excel 文件，Excel文件可以来自用户插在Android设备上的外接U盘，也可以是保存在项目Assets、 Raw里面。资料参考：查阅了很多相关资料，读取外接U盘主要用到了Android 读取USB文件的第三方开源库[GitHub]（https://github.com/magnusja/libaums）用到的J">
+<meta property="og:updated_time" content="2017-06-10T06:44:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 读写 Excel文件">
+<meta name="twitter:description" content="Android 读写 Excel 文件
+需求背景：最近在做项目过程中，需要读取 Excel 文件，Excel文件可以来自用户插在Android设备上的外接U盘，也可以是保存在项目Assets、 Raw里面。资料参考：查阅了很多相关资料，读取外接U盘主要用到了Android 读取USB文件的第三方开源库[GitHub]（https://github.com/magnusja/libaums）用到的J">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.liminwu.me/post/Android 读写Excel文件.html"/>
+
+
+
+
+
+  <title> Android 读写 Excel文件 | 念君的个人站点 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6863a3b1d1d68c2c995a5076a5d7493f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">念君的个人站点</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">生命的意义，不在于追求什么，而在于我们是不是永远在追求的路上。</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.liminwu.me/post/Android 读写Excel文件.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="limin wu">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/head.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="念君的个人站点">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="念君的个人站点" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android 读写 Excel文件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-10T14:39:34+08:00">
+                2017-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/post/Android 读写Excel文件.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="post/Android 读写Excel文件.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/post/Android 读写Excel文件.html" class="leancloud_visitors" data-flag-title="Android 读写 Excel文件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Android-读写-Excel-文件"><a href="#Android-读写-Excel-文件" class="headerlink" title="Android 读写 Excel 文件"></a>Android 读写 Excel 文件</h1><blockquote>
 <p>需求背景：最近在做项目过程中，需要读取 Excel 文件，Excel文件可以来自用户插在Android设备上的外接U盘，也可以是保存在项目Assets、 Raw里面。<br>资料参考：查阅了很多相关资料，读取外接U盘主要用到了Android 读取USB文件的第三方开源库<br>[GitHub]（<a href="https://github.com/magnusja/libaums）" target="_blank" rel="external">https://github.com/magnusja/libaums）</a><br>用到的Jar文件 <a href="http://download.csdn.net/detail/liminwu_6/9866577" target="_blank" rel="external">Jar</a><br>读写Asset Raw文件也可以用<a href="http://download.csdn.net/detail/likai22/534250" target="_blank" rel="external">jxl.jar</a><br>本文将从以下两个方面介绍Excel文件的读写</p>
 </blockquote>
 <ul>
@@ -70,281 +447,615 @@
 <li><p>注意事项：在读取Excel文件时有可能会遇到下面的错误<br><code>jxl.read.biff.BiffException: Unable to recognize OLE stream</code><br>这是因为因为文件是Excel2007，而jxl解析07会报上述异常，也就是jxl可以处理Excel2003。只需要原文件另存为2003文 件即可</p>
 </li>
 </ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Android-读写-Excel-文件&quot;&gt;&lt;a href=&quot;#Android-读写-Excel-文件&quot; class=&quot;headerlink&quot; title=&quot;Android 读写 Excel 文件&quot;&gt;&lt;/a&gt;Android 读写 Excel 文件&lt;/h1&gt;&lt;bloc
-    
-    </summary>
-    
-    
-      <category term="Android" scheme="http://www.liminwu.me/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android自定义控件</title>
-    <link href="http://www.liminwu.me/post/Android%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6.html"/>
-    <id>http://www.liminwu.me/post/Android自定义控件.html</id>
-    <published>2017-04-11T05:59:15.000Z</published>
-    <updated>2017-04-11T06:00:26.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="自定义控件"><a href="#自定义控件" class="headerlink" title="自定义控件"></a>自定义控件</h1><ul>
-<li>Android自身带的控件不能满足需求, 需要根据自己的需求定义控件.</li>
-</ul>
-<h2 id="自定义控件可以分为三大类型"><a href="#自定义控件可以分为三大类型" class="headerlink" title="自定义控件可以分为三大类型"></a>自定义控件可以分为三大类型</h2><h3 id="1-组合已有的控件实现"><a href="#1-组合已有的控件实现" class="headerlink" title="1. 组合已有的控件实现"></a>1. 组合已有的控件实现</h3><ul>
-<li><p>优酷菜单</p>
-<pre><code>1. 在xml布局里摆放好, OK
-2. 给指定控件添加点击事件. OK
-3. 根据业务逻辑,执行动画(旋转动画: 补间动画). OK
-4. 菜单按钮的截获. OK
-</code></pre></li>
-<li><p>轮播图广告</p>
-<pre><code>1. 让图片滑动起来(ViewPager), OK
-2. 让图片和文字,指示器对应起来, OK
-3. 让轮播器无限循环
 
-    向右无限循环  
-        0 -&gt; 4    newPosition = position % 5  
-        5 -&gt; 0  
-        6 -&gt; 1  
-        7 -&gt; 2  
-        8 -&gt; 3  
-        9 -&gt; 4  
-       10 -&gt; 0  
-    向左无限循环  
-        设置到中间某个位置.        
-4. 轮播器自动轮询, OK        
-</code></pre></li>
-<li><p>下拉选择框</p>
-</li>
-</ul>
-<ul>
-<li><p>Button或ImageButton等自带按钮功能的控件会抢夺所在Layout的焦点.导致其他区域点击不生效.在所在layout声明一个属性</p>
-<pre><code>android:descendantFocusability=&quot;blocksDescendants&quot;
-</code></pre></li>
-<li><p>popupwindow获取焦点, 外部可点击</p>
-<pre><code>    // 设置点击外部区域, 自动隐藏
-popupWindow.setOutsideTouchable(true); // 外部可触摸
-popupWindow.setBackgroundDrawable(new BitmapDrawable()); // 设置空的背景, 响应点击事件
+      
+    </div>
 
-popupWindow.setFocusable(true); //设置可获取焦点
-</code></pre></li>
-</ul>
-<h3 id="2-完全自定义控件-继承View-ViewGroup"><a href="#2-完全自定义控件-继承View-ViewGroup" class="headerlink" title="2. 完全自定义控件.(继承View, ViewGroup)"></a>2. 完全自定义控件.(继承View, ViewGroup)</h3><ul>
-<li><ol>
-<li><p>自定义开关  </p>
-<blockquote>
-<ul>
-<li><ol>
-<li>写个类继承View, OK</li>
-</ol>
-</li>
-<li><ol>
-<li>拷贝包含包名的全路径到xml中, OK</li>
-</ol>
-</li>
-<li><ol>
-<li>界面中找到该控件, 设置初始信息, OK</li>
-</ol>
-</li>
-<li><ol>
-<li>根据需求绘制界面内容,OK</li>
-</ol>
-</li>
-<li><ol>
-<li>响应用户的触摸事件,OK</li>
-</ol>
-</li>
-<li><ol>
-<li>创建一个状态更新监听.OK</li>
-</ol>
-</li>
-</ul>
-</blockquote>
-<p>// 1. 声明接口对象<br>public interface OnSwitchStateUpdateListener{<br>   // 状态回调, 把当前状态传出去<br>   void onStateUpdate(boolean state);<br>}<br>// 2. 添加设置接口对象的方法, 外部进行调用<br>public void setOnSwitchStateUpdateListener(</p>
-<pre><code>OnSwitchStateUpdateListener onSwitchStateUpdateListener) {
-    this.onSwitchStateUpdateListener = onSwitchStateUpdateListener;
-</code></pre><p>}<br>// 3. 在合适的位置.执行接口的方法<br>onSwitchStateUpdateListener.onStateUpdate(state);</p>
-<p>// 4. 界面/外部, 收到事件.</p>
-<blockquote>
-<ul>
-<li><ol>
-<li>自定义属性</li>
-</ol>
-</li>
-</ul>
-</blockquote>
-<ol>
-<li><p>在attrs.xml声明节点declare-styleable</p>
-<p><declare-styleable name="ToggleView"></declare-styleable></p>
-<pre><code>&lt;attr name=&quot;switch_background&quot; format=&quot;reference&quot; /&gt;
-&lt;attr name=&quot;slide_button&quot; format=&quot;reference&quot; /&gt;
-&lt;attr name=&quot;switch_state&quot; format=&quot;boolean&quot; /&gt;
-</code></pre><p></p>
-</li>
-<li><p>R会自动创建变量</p>
-<p>attr 3个变量<br>styleable 一个int数组, 3个变量(保存位置)</p>
-</li>
-<li><p>在xml配置声明的属性/ 注意添加命名空间</p>
-<p>xmlns:itheima=”<a href="http://schemas.android.com/apk/res/com.itheima74.toggleview" target="_blank" rel="external">http://schemas.android.com/apk/res/com.itheima74.toggleview</a>“</p>
-<p>itheima:switch_background=”@drawable/switch_background”<br>itheima:slide_button=”@drawable/slide_button”<br>itheima:switch_state=”false”</p>
-</li>
-<li><p>在构造函数中获取并使用</p>
-<p>// 获取配置的自定义属性<br>String namespace = “<a href="http://schemas.android.com/apk/res/com.itheima74.toggleview" target="_blank" rel="external">http://schemas.android.com/apk/res/com.itheima74.toggleview</a>“;<br>int switchBackgroundResource = attrs.getAttributeResourceValue(namespace , “switch_background”, -1);</p>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<ul>
-<li>Android 的界面绘制流程</li>
-</ul>
-</blockquote>
-<pre><code>测量             摆放        绘制
-measure    -&gt;    layout    -&gt;    draw
-      |           |             |
-onMeasure -&gt; onLayout -&gt; onDraw 重写这些方法, 实现自定义控件
+    <div>
+      
+        
 
-都在onResume()之后执行
+      
+    </div>
 
-View流程
-onMeasure() (在这个方法里指定自己的宽高) -&gt; onDraw() (绘制自己的内容)
+    <div>
+      
+        
 
-ViewGroup流程
-onMeasure() (指定自己的宽高, 所有子View的宽高)-&gt; onLayout() (摆放所有子View) -&gt; onDraw() (绘制内容)
-</code></pre><ul>
-<li><ol>
-<li>侧滑面板</li>
-</ol>
-</li>
-</ul>
-<h3 id="3-继承已有的控件实现-扩展已有的功能"><a href="#3-继承已有的控件实现-扩展已有的功能" class="headerlink" title="3. 继承已有的控件实现(扩展已有的功能)"></a>3. 继承已有的控件实现(扩展已有的功能)</h3><ul>
-<li><ol>
-<li>包含下拉刷新功能的ListView</li>
-</ol>
-</li>
-</ul>
-]]></content>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/Android自定义控件.html" rel="next" title="Android自定义控件">
+                <i class="fa fa-chevron-left"></i> Android自定义控件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="post/Android 读写Excel文件.html"
+     data-title="Android 读写 Excel文件"
+     data-content=""
+     data-url="http://www.liminwu.me/post/Android 读写Excel文件.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
-    <summary type="html">
+      <div class="ds-thread" data-thread-key="post/Android 读写Excel文件.html"
+           data-title="Android 读写 Excel文件" data-url="http://www.liminwu.me/post/Android 读写Excel文件.html">
+      </div>
     
-      &lt;h1 id=&quot;自定义控件&quot;&gt;&lt;a href=&quot;#自定义控件&quot; class=&quot;headerlink&quot; title=&quot;自定义控件&quot;&gt;&lt;/a&gt;自定义控件&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;Android自身带的控件不能满足需求, 需要根据自己的需求定义控件.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 i
-    
-    </summary>
-    
-    
-      <category term="Android" scheme="http://www.liminwu.me/tags/Android/"/>
-    
-  </entry>
+  </div>
+
+
+        </div>
+        
+          
   
-  <entry>
-    <title>Android 读写CSV文件</title>
-    <link href="http://www.liminwu.me/post/Android%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html"/>
-    <id>http://www.liminwu.me/post/Android读写CSV文件.html</id>
-    <published>2017-04-10T06:20:21.000Z</published>
-    <updated>2017-04-11T01:37:28.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="需求背景："><a href="#需求背景：" class="headerlink" title="需求背景："></a>需求背景：</h2><p>   最近在做项目过程中，有以下需求：将用户的交易数据写入到本地文件中，并保存为.csv文件格式，以便导出时供用户查看。</p>
-<h2 id="何为-csv文件？"><a href="#何为-csv文件？" class="headerlink" title="何为.csv文件？"></a>何为.csv文件？</h2><p>   csv文件是以逗号分割的数据仓储，读取数据时从每一行中读取一条数据元祖，也就是一条数据，再用字符分割的方式获取表中的每一个数据项。</p>
-<h2 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h2><p>   首先来简单说下 Android 的文件读写。说到文件的存储，就要涉及到内部存储（internal storage）和外部存储（external storage）。</p>
-<h3 id="内部存储："><a href="#内部存储：" class="headerlink" title="内部存储："></a>内部存储：</h3><p>   注意内部存储不是内存。内部存储位于系统中很特殊的一个位置，如果你想将文件存储于内部存储中，那么文件默认只能被你的应用访问到，且一个应用所创建的所有文件都在和应用包名相同的目录下。也就是说应用创建于内部存储的文件，与这个应用是关联起来的。<strong>当一个应用卸载之后，内部存储中的这些文件也被删除</strong>。从技术上来讲如果你在创建内部存储文件的时候将文件属性设置成可读，其他app能够访问自己应用的数据，前提是他知道你这个应用的包名，如果一个文件的属性是私有（private），那么即使知道包名其他应用也无法访问。 内部存储空间十分有限，因而显得可贵，另外，它也是系统本身和系统应用程序主要的数据存储所在地，一旦内部存储空间耗尽，手机也就无法使用了。所以对于内部存储空间，我们要尽量避免使用。Shared Preferences和SQLite数据库都是存储在内部存储空间上的。内部存储一般用Context来获取和操作。<br>   getFilesDir()获取app的内部存储空间，相当于应用在内部存储上的根目录。<br>   如果是要创建一个文件，如下：<br>   <img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-150933@2x.png" alt="img"><br>   Android 为我们提供了一个简便方法’openFileOutput()’来读写应用在内部存储空间上的文件，下面是向文件中写入文件的例子：<br>   <img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-152021@2x.png" alt="img"><br>   总结一下文件相关操作，可以得出以下三个特点：</p>
-<ul>
-<li>1 文件操作只需要向函数提供文件名，所以程序自己只需要维护文件名即可。</li>
-<li>2 不用自己去创建文件对象和输入、输出流，提供文件名就可以返回File对象或输入输出流。</li>
-<li><p>3 对于路径操作返回的都是文件对象。</p>
-<h3 id="外部存储"><a href="#外部存储" class="headerlink" title="外部存储"></a>外部存储</h3><p>最容易混淆的是外部存储，如果说 PC 上也要区分出外部存储和内部存储的话，那么自带的硬盘算是内部存储，U盘或者移动硬盘算是外部存储，因此我们很容易带着这样的理解去看待安卓手机，认为机身固有存储是内部存储，而扩展的 T 卡是外部存储。比如我们任务 16GB 版本的 Nexus 4有 16G 的内部存储，普通消费者可以这样理解，但是安卓的编程中不能，这 16GB 仍然是外部存储。</p>
-<p>所有的安卓设备都有外部存储和内部存储，这两个名称来源于安卓的早期设备，那个时候的设备内部存储确实是固定的，而外部存储确实是可以像U盘一样移动的。但是在后来的设备中，很多中高端机器都将自己的机身存储扩展到了 8G 以上，他们将存储在概念上分成了”内部internal” 和”外部external” 两部分，但其实都在手机内部。所以不管安卓手机是否有可移动的sdcard，他们总是有外部存储和内部存储。最关键的是，我们都是通过相同的api来访问可移动的sdcard或者手机自带的存储（外部存储）。</p>
-<p>外部存储中的文件是可以被用户或者其他应用程序修改的，有两种类型的文件（或者目录）：</p>
-</li>
-<li><p>公共文件Public files：文件是可以被自由访问，且文件的数据对其他应用或者用户来说都是由意义的，当应用被卸载之后，其卸载前创建的文件仍然保留。比如camera应用，生成的照片大家都能访问，而且camera不在了，照片仍然在。<br>如果想在外存储上放公共文件你可以使用getExternalStoragePublicDirectory()</p>
-</li>
-<li><p>私有文件Private files：其实由于是外部存储的原因即是是这种类型的文件也能被其他程序访问，只不过一个应用私有的文件对其他应用其实是没有访问价值的（恶意程序除外）。外部存储上，应用私有文件的价值在于卸载之后，这些文件也会被删除。类似于内部存储。<br>创建应用私有文件的方法是Context.getExternalFilesDir()。所有应用程序的外部存储的私有文件都放在根目录的Android/data/下，目录形式为/Android/data/<package_name>/</package_name></p>
-<h3 id="getFilesDir，getExternalFilesDir，getExternalStorageDirectory-，getExternalStoragePublicDirectory"><a href="#getFilesDir，getExternalFilesDir，getExternalStorageDirectory-，getExternalStoragePublicDirectory" class="headerlink" title="getFilesDir，getExternalFilesDir，getExternalStorageDirectory ，getExternalStoragePublicDirectory"></a>getFilesDir，getExternalFilesDir，getExternalStorageDirectory ，getExternalStoragePublicDirectory</h3><p>最后为了弄清楚getFilesDir，getExternalFilesDir，getExternalStorageDirectory，getExternalStoragePublicDirectory等android文件操作方法，我将这些方法的执行结果打印出来，看看到底路径是啥样，在activity中执行以下代码：<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-154228@2x.png" alt="img"><br>在log中看到如下结果：<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-154018@2x.png" alt="img"><br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-154120@2x.png" alt="img"><br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-154054@2x.png" alt="img"><br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-154149@2x.png" alt="img"></p>
-<h2 id="csv-文件的读写"><a href="#csv-文件的读写" class="headerlink" title=".csv 文件的读写"></a>.csv 文件的读写</h2><ul>
-<li>1 将.csv文件写入到内存<br>项目需求是在进行充值交易时，为了看到交易前与交易后数据是否成功，所以在交易前先将一些可知的请求参数写入文件当中，首先在主 Activity 中编写以下代码:<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-155640@2x.png" alt="img"><br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-155824@2x.png" alt="img"><br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-155848@2x.png" alt="img"><br>然后将表头数据写入’buffer.append(“交易批次,交易序号,客户名,身份证号,卡号,交易流水,交易原金额,交易金额,交易后金额,交易时间,交易是否成功,是否超时\r\n”);’<br>等交易成功后，再将请求响应获得的数据，追加到上面写入的文件末尾，代码如下：<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-160543@2x.png" alt="img"><br>至此，我们已经将.csv格式的文件写入到本地，预览效果如下：<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-161154@2x.png" alt="img"></li>
-<li>2 读完.csv文件显示到界面上<br>用户在APP交易明细查询中需要显示出文件中保存的数据，所以我们还需要将保存到.csv文件中的内容显示到界面上。代码如下:<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-161555@2x.png" alt="img"><br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-161618@2x.png" alt="img"><br>在读取.csv格式的文件中，用到了第三方解析工具javacsv.jar，可以在网上自行搜索下载到，<br>工具类代码如下:<br><img src="http://ome4apvpf.bkt.clouddn.com/WX20170410-162148@2x.png" alt="img"></li>
-</ul>
-<p>参考:「android中的文件操作详解以及内部存储和外部存储」<br><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2013/0923/1557.html" target="_blank" rel="external">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2013/0923/1557.html</a></p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;需求背景：&quot;&gt;&lt;a href=&quot;#需求背景：&quot; class=&quot;headerlink&quot; title=&quot;需求背景：&quot;&gt;&lt;/a&gt;需求背景：&lt;/h2&gt;&lt;p&gt;   最近在做项目过程中，有以下需求：将用户的交易数据写入到本地文件中，并保存为.csv文件格式，以便导出时供用户查
-    
-    </summary>
-    
-    
-      <category term="Android" scheme="http://www.liminwu.me/tags/Android/"/>
-    
-  </entry>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/head.png"
+               alt="limin wu" />
+          <p class="site-author-name" itemprop="name">limin wu</p>
+          <p class="site-description motion-element" itemprop="description">你一无所有，还特么矫情和懒惰。。。</p>
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/liminwu0626" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-读写-Excel-文件"><span class="nav-number">1.</span> <span class="nav-text">Android 读写 Excel 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-读写-U-盘-Excel-文件"><span class="nav-number">1.1.</span> <span class="nav-text">Android 读写 U 盘 Excel 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-读取Assets-下的Excel文件"><span class="nav-number">1.2.</span> <span class="nav-text">Android 读取Assets 下的Excel文件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  <entry>
-    <title>Mac安装Homebrew</title>
-    <link href="http://www.liminwu.me/post/Mac%E5%AE%89%E8%A3%85Homebrew.html"/>
-    <id>http://www.liminwu.me/post/Mac安装Homebrew.html</id>
-    <published>2017-03-12T16:23:57.000Z</published>
-    <updated>2017-04-10T06:27:58.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Mac安装Homebrew"><a href="#Mac安装Homebrew" class="headerlink" title="Mac安装Homebrew"></a>Mac安装Homebrew</h1><p>brew 全称Homebrew  是Mac OSX上的软件包管理工具<br>Homebrew 安装和卸载工具 只用一行命令就能完成<br>官方地址:    <a href="http://brew.sh/index.html" target="_blank" rel="external">http://brew.sh/index.html</a><br>mac 自带ruby<br>打开命令行  terminal<br>输入  :</p>
-<ol>
-<li>ruby -version<br>命令行输出:<br><img src="http://ome4apvpf.bkt.clouddn.com/17-3-13/32933292-file_1489336308768_426.png" alt="img"><h3 id="1-安装命令"><a href="#1-安装命令" class="headerlink" title="1) 安装命令"></a>1) 安装命令</h3></li>
-<li>ruby -e “$(curl -fsSL <a href="https://raw.github.com/Homebrew/homebrew/go/install" target="_blank" rel="external">https://raw.github.com/Homebrew/homebrew/go/install</a>)”<br>假如已经安装了  输入如下命令</li>
-<li>ruby -e “$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install" target="_blank" rel="external">https://raw.githubusercontent.com/Homebrew/install/master/install</a>)”<br>命令行输出:<br><img src="http://ome4apvpf.bkt.clouddn.com/17-3-13/3446560-file_1489336480805_10e6d.png" alt="img"><h3 id="2-brew-使用方法"><a href="#2-brew-使用方法" class="headerlink" title="2) brew 使用方法"></a>2) brew 使用方法</h3>命令行 输入:  brew<br>输出:<br><img src="http://ome4apvpf.bkt.clouddn.com/17-3-13/15237410-file_1489336625045_2046.png" alt="img"><h3 id="3-安装工具"><a href="#3-安装工具" class="headerlink" title="3) 安装工具"></a>3) 安装工具</h3>举个栗子:   Mongodb  这个工具<br>输入命令:   brew install Mongodb<br>如图:<br><img src="http://ome4apvpf.bkt.clouddn.com/17-3-13/8164777-file_1489336698870_11cd.png" alt="img"><h3 id="4-卸载"><a href="#4-卸载" class="headerlink" title="4)  卸载"></a>4)  卸载</h3>拿上面的栗子:   Mongodb 工具<br>输入命令    brew uninstall Mongodb<h3 id="5-工具安装的目录"><a href="#5-工具安装的目录" class="headerlink" title="5)  工具安装的目录"></a>5)  工具安装的目录</h3>Homebrew 会将套件安装到独立目录，并将文件软链接至/usr/local 。</li>
-<li>$ cd /usr/local  </li>
-<li>$ find Cellar  </li>
-<li>Cellar/wget/1.16.1  </li>
-<li>Cellar/wget/1.16.1/bin/wget  </li>
-<li>Cellar/wget/1.16.1/share/man/man1/wget.1  </li>
-<li>$ ls -l bin  </li>
-<li>bin/wget -&gt; ../Cellar/wget/1.16.1/bin/wget<br>Homebrew 的所有文件均会被安装到预定义目录下，所以无需担心 Homebrew 的安装位置。<h3 id="6-其他命令"><a href="#6-其他命令" class="headerlink" title="6) 其他命令"></a>6) 其他命令</h3>brew list       列出已安装的软件<br>brew update     更新brew<br>brew home       用浏览器打开brew的官方网站<br>brew info       显示软件信息<br>brew deps        显示包依赖<br>更多命令请看:    <a href="https://git.io/brew-docs" target="_blank" rel="external">https://git.io/brew-docs</a><h3 id="7-安装过程中遇到的问题"><a href="#7-安装过程中遇到的问题" class="headerlink" title="7)安装过程中遇到的问题"></a>7)安装过程中遇到的问题</h3>brew安装应用的时候碰上“curl: (7) couldn’t connect to host 的问题”,可以使用代理，让curl通过代理来访问。编辑$HOME/.curlrc文件，增加“–socks5 127.0.0.1:1080”即可（替换成你自己的代理），这样你在brew install安装的时候，相应curl就会通过socks代理访问，从而成功下载完成安装。方便简单，就是你需要自己设置一个socks代理。</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Mac安装Homebrew&quot;&gt;&lt;a href=&quot;#Mac安装Homebrew&quot; class=&quot;headerlink&quot; title=&quot;Mac安装Homebrew&quot;&gt;&lt;/a&gt;Mac安装Homebrew&lt;/h1&gt;&lt;p&gt;brew 全称Homebrew  是Mac OSX上
-    
-    </summary>
-    
-    
-      <category term="JavaScript" scheme="http://www.liminwu.me/tags/JavaScript/"/>
-    
-  </entry>
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">limin wu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
   
-  <entry>
-    <title>Hello World</title>
-    <link href="http://www.liminwu.me/post/hello-world.html"/>
-    <id>http://www.liminwu.me/post/hello-world.html</id>
-    <published>2017-01-17T07:08:53.000Z</published>
-    <updated>2017-01-17T07:08:53.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-    
-  </entry>
+    <span class="site-uv">本站访客数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
   
-</feed>
+
+  
+    <span class="site-pv">本站总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liminwu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("N2rguWt3yFoGhEd2MvrOP0af-gzGzoHsz", "NMbVY1aYz2lBQfvUwzyRS7i4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
